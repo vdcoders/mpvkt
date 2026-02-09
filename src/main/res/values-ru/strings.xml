@@ -233,9 +233,4 @@
     <string name="swap_the_volume_and_brightness_slider">Поменять местами панель громкости и яркости</string>
     <string name="pref_player_display_reduce_player_animation">Уменьшить анимацию плеера</string>
     <string name="pref_player_display_hide_player_control_time">Время скрытия управления плеера</string>
-
-    <plurals name="plural_items">
-        <item quantity="one">%1$d элемент</item>
-        <item quantity="other">%1$d элементы</item>
-    </plurals>
 </resources>

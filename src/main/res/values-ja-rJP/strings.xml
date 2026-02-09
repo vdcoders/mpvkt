@@ -284,14 +284,4 @@
     <string name="notification_stop">停止</string>
     <string name="notification_forward">早送り</string>
     <string name="notification_rewind">巻き戻し</string>
-
-    <plurals name="plural_items">
-        <item quantity="one">%1$d 個の項目</item>
-        <item quantity="other">%1$d 個の項目</item>
-    </plurals>
-
-    <plurals name="seconds">
-        <item quantity="one">%1$d 秒</item>
-        <item quantity="other">%1$d 秒</item>
-    </plurals>
 </resources>

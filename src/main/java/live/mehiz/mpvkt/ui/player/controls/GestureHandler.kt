@@ -36,6 +36,7 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import `is`.xyz.mpv.MPVLib
@@ -320,7 +321,7 @@ fun DoubleTapToSeekOvals(
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
               DoubleTapSeekTriangles(isForward = amount > 0)
               Text(
-                text = text ?: pluralStringResource(R.plurals.seconds, amount, amount),
+                  text = text ?: stringResource(R.string.seconds, amount),
                 fontSize = 12.sp,
                 textAlign = TextAlign.Center,
                 color = Color.White,

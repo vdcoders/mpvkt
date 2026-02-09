@@ -187,8 +187,4 @@
     <string name="timer_picker_pick_time">Elegir tiempo</string>
     <string name="toast_sleep_timer_ended">Temporizador finalizado</string>
 
-    <plurals name="plural_items">
-        <item quantity="one">%1$d elemento</item>
-        <item quantity="other">%1$d elementos</item>
-    </plurals>
 </resources>

@@ -285,13 +285,4 @@
     <string name="notification_forward">Maju</string>
     <string name="notification_rewind">Mundur</string>
 
-    <plurals name="plural_items">
-        <item quantity="one">%1$d item</item>
-        <item quantity="other">%1$d item</item>
-    </plurals>
-
-    <plurals name="seconds">
-        <item quantity="one">%1$d detik</item>
-        <item quantity="other">%1$d detik</item>
-    </plurals>
 </resources>

@@ -56,7 +56,7 @@
     <string name="pref_player_gestures_brightness">Brightness gestures</string>
     <string name="pref_player_gestures_volume">Volume gestures</string>
     <string name="pref_player_gestures_hold_for_double_speed">Hold for 2x speed</string>
-    <string name="pref_player_gestures_hold_for_multiple_speed">Hold for multi - x speed</string>
+    <string name="pref_player_gestures_hold_for_multiple_speed" translatable="false">Hold for multi - x speed</string>
 
     <string name="pref_player_controls">Controls</string>
     <string name="pref_player_controls_allow_gestures_in_panels">Allow gestures in panels</string>
@@ -65,29 +65,29 @@
     <string name="pref_player_controls_show_chapter_indicator">Show current chapter indicator</string>
     <string name="pref_player_controls_show_chapters_button">Show chapters select button</string>
     <string name="pref_player_controls_show_chapters_summary">Only appears if the video has chapters</string>
-    <string name="pref_player_display_show_status_bar">Show system status bar with controls</string>
+    <string name="pref_player_display_show_status_bar" translatable="false">Show system status bar with controls</string>
     
-    <string name="pref_player_display">Display</string>
-    <string name="pref_player_display_panel_opacity">Panel opacity</string>
-    <string name="pref_player_display_panel_transparency_summary">%d%%</string>
+    <string name="pref_player_display" translatable="false">Display</string>
+    <string name="pref_player_display_panel_opacity" translatable="false">Panel opacity</string>
+    <string name="pref_player_display_panel_transparency_summary" translatable="false">%d%%</string>
 
-    <string name="pref_gesture">Gestures</string>
-    <string name="pref_gesture_summary">Double tap, media controls</string>
-    <string name="pref_gesture_double_tap_title">Double tap</string>
-    <string name="pref_gesture_double_tap_none">None</string>
-    <string name="pref_gesture_double_tap_seek">Seek</string>
-    <string name="pref_gesture_double_tap_play">Play/Pause</string>
-    <string name="pref_gesture_double_tap_custom">Custom</string>
-    <string name="pref_gesture_double_tap_left_title">Double tap (left)</string>
-    <string name="pref_gesture_double_tap_center_title">Double tap (center)</string>
-    <string name="pref_gesture_double_tap_right_title">Double tap (right)</string>
-    <string name="pref_gesture_double_tap_custom_info">When a tap gesture is set to "Custom", it can be bound through input.conf. The key codes are 0x10001 for left, 0x10002 for center, and 0x10003 for right.</string>
+    <string name="pref_gesture" translatable="false">Gestures</string>
+    <string name="pref_gesture_summary" translatable="false">Double tap, media controls</string>
+    <string name="pref_gesture_double_tap_title" translatable="false">Double tap</string>
+    <string name="pref_gesture_double_tap_none" translatable="false">None</string>
+    <string name="pref_gesture_double_tap_seek" translatable="false">Seek</string>
+    <string name="pref_gesture_double_tap_play" translatable="false">Play/Pause</string>
+    <string name="pref_gesture_double_tap_custom" translatable="false">Custom</string>
+    <string name="pref_gesture_double_tap_left_title" translatable="false">Double tap (left)</string>
+    <string name="pref_gesture_double_tap_center_title" translatable="false">Double tap (center)</string>
+    <string name="pref_gesture_double_tap_right_title" translatable="false">Double tap (right)</string>
+    <string name="pref_gesture_double_tap_custom_info" translatable="false">When a tap gesture is set to "Custom", it can be bound through input.conf. The key codes are 0x10001 for left, 0x10002 for center, and 0x10003 for right.</string>
 
-    <string name="pref_gesture_media_title">Media controls</string>
-    <string name="pref_gesture_media_previous">Previous</string>
-    <string name="pref_gesture_media_play">Play/Pause</string>
-    <string name="pref_gesture_media_next">Next</string>
-    <string name="pref_gesture_media_custom_info">When a media control is set to "Custom", it can be bound through input.conf. The key codes are 0x10004 for previous, 0x10005 for play/pause, and 0x10006 for next.</string>
+    <string name="pref_gesture_media_title" translatable="false">Media controls</string>
+    <string name="pref_gesture_media_previous" translatable="false">Previous</string>
+    <string name="pref_gesture_media_play" translatable="false">Play/Pause</string>
+    <string name="pref_gesture_media_next" translatable="false">Next</string>
+    <string name="pref_gesture_media_custom_info" translatable="false">When a media control is set to "Custom", it can be bound through input.conf. The key codes are 0x10004 for previous, 0x10005 for play/pause, and 0x10006 for next.</string>
 
     <string name="pref_decoder">Decoder</string>
     <string name="pref_decoder_summary">Hardware decoding, pixel format, debanding</string>
@@ -103,8 +103,8 @@
     <string name="pref_preferred_languages">Preferred languages</string>
     <string name="pref_subtitles_fonts_dir">Fonts directory</string>
     <string name="pref_subtitles_preferred_language">Subtitle language(s) to be selected by default on a video with multiple subtitles, Two- or three-letter languages codes work. Multiple values can be delimited by comma.</string>
-    <string name="pref_subtitles_autoload_title">Automatically load subtitles</string>
-    <string name="pref_subtitles_autoload_summary">Automatically load external subtitles with the same name. When there are multiple files, the first one is enabled by default. (Only valid when using the file picker)</string>
+    <string name="pref_subtitles_autoload_title" translatable="false">Automatically load subtitles</string>
+    <string name="pref_subtitles_autoload_summary" translatable="false">Automatically load external subtitles with the same name. When there are multiple files, the first one is enabled by default. (Only valid when using the file picker)</string>
 
     <string name="pref_audio">Audio</string>
     <string name="pref_audio_summary">Preferred languages, audio channels, pitch correction</string>
@@ -124,8 +124,8 @@
     <string name="pref_advanced_mpv_conf_storage_location">Pick configuration storage location</string>
     <string name="pref_advanced_mpv_conf">Edit mpv.conf</string>
     <string name="pref_advanced_input_conf">Edit input.conf</string>
-    <string name="pref_advanced_dump_logs_title">Dump logs</string>
-    <string name="pref_advanced_dump_logs_summary">Dumps and copies the logs to be shared with the developers</string>
+    <string name="pref_advanced_dump_logs_title" translatable="false">Dump logs</string>
+    <string name="pref_advanced_dump_logs_summary" translatable="false">Dumps and copies the logs to be shared with the developers</string>
     <string name="pref_advanced_verbose_logging_title">Verbose logging</string>
     <string name="pref_advanced_verbose_logging_summary">Helps in debugging but may hinder performance</string>
     <string name="pref_advanced_clear_playback_history">Clear playback history</string>
@@ -137,28 +137,28 @@
     <string name="pref_advanced_clear_mpv_conf_cache">Clear cached mpv configurations</string>
     <string name="pref_advanced_cleared_mpv_conf_cache">Cleared cached mpv configurations</string>
 
-    <string name="pref_custom_buttons_title">Custom buttons</string>
-    <string name="pref_custom_buttons_summary">Execute lua code with custom buttons</string>
-    <string name="pref_custom_button_action_add">Add</string>
-    <string name="pref_custom_button_action_add_title_text">Title</string>
-    <string name="pref_custom_button_action_add_already_exists">Button already exists!</string>
-    <string name="pref_custom_button_action_add_required">*required</string>
-    <string name="pref_custom_button_action_add_optional">(optional)</string>
-    <string name="pref_custom_button_action_add_content_text">Lua code</string>
-    <string name="pref_custom_button_action_add_long_press_text">Lua code (on long press)</string>
-    <string name="pref_custom_button_add_button">Add custom button</string>
-    <string name="pref_custom_button_empty">You have no custom buttons. Tap the plus button to add custom buttons.</string>
-    <string name="pref_custom_button_edit_button">Edit button</string>
-    <string name="pref_custom_button_edit_button_id">(ID: %d)</string>
-    <string name="pref_custom_button_delete_button">Delete button</string>
-    <string name="pref_custom_button_delete_confirmation">Do you wish to delete the button \"%s\"?</string>
+    <string name="pref_custom_buttons_title" translatable="false">Custom buttons</string>
+    <string name="pref_custom_buttons_summary" translatable="false">Execute lua code with custom buttons</string>
+    <string name="pref_custom_button_action_add" translatable="false">Add</string>
+    <string name="pref_custom_button_action_add_title_text" translatable="false">Title</string>
+    <string name="pref_custom_button_action_add_already_exists" translatable="false">Button already exists!</string>
+    <string name="pref_custom_button_action_add_required" translatable="false">*required</string>
+    <string name="pref_custom_button_action_add_optional" translatable="false">(optional)</string>
+    <string name="pref_custom_button_action_add_content_text" translatable="false">Lua code</string>
+    <string name="pref_custom_button_action_add_long_press_text" translatable="false">Lua code (on long press)</string>
+    <string name="pref_custom_button_add_button" translatable="false">Add custom button</string>
+    <string name="pref_custom_button_empty" translatable="false">You have no custom buttons. Tap the plus button to add custom buttons.</string>
+    <string name="pref_custom_button_edit_button" translatable="false">Edit button</string>
+    <string name="pref_custom_button_edit_button_id" translatable="false">(ID: %d)</string>
+    <string name="pref_custom_button_delete_button" translatable="false">Delete button</string>
+    <string name="pref_custom_button_delete_confirmation" translatable="false">Do you wish to delete the button \"%s\"?</string>
 
     <string name="pref_about_title">About</string>
     <string name="pref_about_summary">Acknowledgments, licenses</string>
     <string name="pref_about_app_version">App version</string>
     <string name="pref_about_app_version_formatted" translatable="false">%s %s</string>
     <string name="pref_about_oss_libraries">Open source libraries</string>
-    <string name="pref_about_privacy_policy">Privacy policy</string>
+    <string name="pref_about_privacy_policy" translatable="false">Privacy policy</string>
 
     <string name="player_sheets_add_ext_sub">Add external subtitles</string>
     <string name="player_sheets_add_ext_audio">Add external audio tracks</string>
@@ -166,8 +166,8 @@
     <string name="player_sheets_track_title_w_lang" translatable="false">#%d: %s (%s)</string>
     <string name="player_sheets_track_title_wo_lang" translatable="false">#%d: %s</string>
     <string name="player_sheets_track_lang_wo_title" translatable="false">#%d: %s</string>
-    <string name="player_sheets_chapter_title_substitute_audio">Audio #%d</string>
-    <string name="player_sheets_chapter_title_substitute_subtitle">Subtitle #%d</string>
+    <string name="player_sheets_chapter_title_substitute_audio" translatable="false">Audio #%d</string>
+    <string name="player_sheets_chapter_title_substitute_subtitle" translatable="false">Subtitle #%d</string>
     <string name="player_sheets_subtitles_footer_secondary_sid_no_styles">Secondary subtitles will have no ASS/SSA Styling.</string>
     <string name="player_sheets_subtitles_settings_title">Subtitles settings</string>
     <string name="player_sheets_subtitles_color_text">Text</string>
@@ -205,15 +205,15 @@
     <string name="player_sheets_sub_delay_audio_sound_heard">Sound heard</string>
     <string name="player_sheets_sub_delay_sound_sound_spotted">Sound spotted</string>
 
-    <string name="player_sheets_video_settings_title">Video settings</string>
-    <string name="player_sheets_deband_title">Deband</string>
-    <string name="player_sheets_deband_none">None</string>
-    <string name="player_sheets_deband_cpu">CPU</string>
-    <string name="player_sheets_deband_gpu">GPU</string>
-    <string name="player_sheets_deband_iterations">Iterations</string>
-    <string name="player_sheets_deband_threshold">Threshold</string>
-    <string name="player_sheets_deband_range">Range</string>
-    <string name="player_sheets_deband_grain">Grain</string>
+    <string name="player_sheets_video_settings_title" translatable="false">Video settings</string>
+    <string name="player_sheets_deband_title" translatable="false">Deband</string>
+    <string name="player_sheets_deband_none" translatable="false">None</string>
+    <string name="player_sheets_deband_cpu" translatable="false">CPU</string>
+    <string name="player_sheets_deband_gpu" translatable="false">GPU</string>
+    <string name="player_sheets_deband_iterations" translatable="false">Iterations</string>
+    <string name="player_sheets_deband_threshold" translatable="false">Threshold</string>
+    <string name="player_sheets_deband_range" translatable="false">Range</string>
+    <string name="player_sheets_deband_grain" translatable="false">Grain</string>
     <string name="player_sheets_filters_title">Filters</string>
     <string name="player_sheets_filters_brightness">Brightness</string>
     <string name="player_sheets_filters_contrast">Contrast</string>
@@ -233,7 +233,7 @@
     <string name="player_sheets_more_title">More</string>
     <string name="player_sheets_stats_page_title">Default statistics page</string>
     <string name="player_sheets_stats_page_chip">Page %d</string>
-    <string name="player_sheets_custom_buttons_title">Custom buttons</string>
+    <string name="player_sheets_custom_buttons_title" translatable="false">Custom buttons</string>
     <string name="player_seek_n_seconds">%d seconds</string>
     <string name="player_speed" translatable="false">%.2fx</string>
     <string name="player_gesture_seek_indicator" translatable="false">%c%s\n[%s]</string>
@@ -250,8 +250,8 @@
 
     <string name="timer_picker_enter_timer">Enter time</string>
     <string name="timer_picker_pick_time">Pick time</string>
-    <string name="timer_title">Sleep timer</string>
-    <string name="timer_remaining">%s remaining</string>
+    <string name="timer_title" translatable="false">Sleep timer</string>
+    <string name="timer_remaining" translatable="false">%s remaining</string>
 
     <string name="toast_sleep_timer_ended">Sleep timer ended</string>
 
@@ -267,31 +267,22 @@
 
     <string name="github_repo_url" translatable="false">https://github.com/abdallahmehiz/mpvKt</string>
     <string name="privacy_policy_url" translatable="false">https://abdallahmehiz.github.io/mpvKt/privacy_policy.html</string>
-    <string name="swap_the_volume_and_brightness_slider">Swap volume and brightness slider</string>
-    <string name="pref_player_display_reduce_player_animation">Reduce player animation</string>
-    <string name="pref_player_display_hide_player_control_time">Hide player control time</string>
-    <string name="show_splash_ovals_on_double_tap_to_seek">Show ripple when double tap seeking</string>
-    <string name="show_time_on_double_tap_to_seek">Show seek time</string>
-    <string name="show_icon_on_double_tap_to_seek">Show seek icon</string>
+    <string name="swap_the_volume_and_brightness_slider" translatable="false">Swap volume and brightness slider</string>
+    <string name="pref_player_display_reduce_player_animation" translatable="false">Reduce player animation</string>
+    <string name="pref_player_display_hide_player_control_time" translatable="false">Hide player control time</string>
+    <string name="show_splash_ovals_on_double_tap_to_seek" translatable="false">Show ripple when double tap seeking</string>
+    <string name="show_time_on_double_tap_to_seek" translatable="false">Show seek time</string>
+    <string name="show_icon_on_double_tap_to_seek" translatable="false">Show seek icon</string>
 
-    <string name="pref_enable_background_playback">Enable background playback</string>
-    <string name="pref_enable_background_playback_summary">Continue playback when the app is in background</string>
-    <string name="notification_channel_name">Playback Controls</string>
-    <string name="notification_channel_description">Controls for the currently playing media</string>
-    <string name="notification_playing">Now playing</string>
-    <string name="notification_pause">Pause</string>
-    <string name="notification_play">Play</string>
-    <string name="notification_stop">Stop</string>
-    <string name="notification_forward">Forward</string>
-    <string name="notification_rewind">Rewind</string>
-
-    <plurals name="plural_items">
-        <item quantity="one">%1$d item</item>
-        <item quantity="other">%1$d items</item>
-    </plurals>
-
-    <plurals name="seconds">
-        <item quantity="one">%1$d second</item>
-        <item quantity="other">%1$d seconds</item>
-    </plurals>
+    <string name="pref_enable_background_playback" translatable="false">Enable background playback</string>
+    <string name="pref_enable_background_playback_summary" translatable="false">Continue playback when the app is in background</string>
+    <string name="notification_channel_name" translatable="false">Playback Controls</string>
+    <string name="notification_channel_description" translatable="false">Controls for the currently playing media</string>
+    <string name="notification_playing" translatable="false">Now playing</string>
+    <string name="notification_pause" translatable="false">Pause</string>
+    <string name="notification_play" translatable="false">Play</string>
+    <string name="notification_stop" translatable="false">Stop</string>
+    <string name="notification_forward" translatable="false">Forward</string>
+    <string name="notification_rewind" translatable="false">Rewind</string>
+    <string name="seconds" translatable="false">%1$d sec</string>
 </resources>
