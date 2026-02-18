@@ -1,5 +1,4 @@
 import com.vanniktech.maven.publish.SonatypeHost
-import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
   alias(libs.plugins.ksp)
@@ -7,11 +6,10 @@ plugins {
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.compose.compiler)
   alias(libs.plugins.room)
-  alias(libs.plugins.detekt)
-  alias(libs.plugins.about.libraries)
   alias(libs.plugins.kotlin.serialization)
 }
-version = "0.0.4"
+
+version = "0.0.10"
 android {
   namespace = "live.mehiz.mpvkt"
     compileSdk = libs.versions.compileSdk.get().toInt()
@@ -94,16 +92,9 @@ dependencies {
 
   implementation(libs.seeker)
   implementation(libs.compose.prefs)
-  implementation(libs.bundles.about.libs)
-  implementation(libs.simple.icons)
-
   implementation(libs.room.runtime)
   ksp(libs.room.compiler)
   implementation(libs.room.ktx)
-
-  implementation(libs.detekt.gradle.plugin)
-  detektPlugins(libs.detekt.rules.compose)
-  detektPlugins(libs.detekt.formatter)
 
   implementation(libs.kotlinx.immutable.collections)
   implementation(libs.kotlinx.serialization.json)
@@ -111,21 +102,6 @@ dependencies {
   implementation(libs.fsaf)
 }
 
-detekt {
-  parallel = true
-  allRules = false
-  buildUponDefaultConfig = true
-  config.setFrom("$projectDir/config/detekt/detekt.yml")
-}
-
-tasks.withType<Detekt>().configureEach {
-  setSource(files(project.projectDir))
-  exclude("**/build/**")
-  reports {
-    html.required.set(true)
-    md.required.set(true)
-  }
-}
 fun getVersionName(): String = project.version.toString()
 fun getGroupId(): String = "io.github.vdcoders"
 
