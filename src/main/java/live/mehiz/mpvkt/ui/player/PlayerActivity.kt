@@ -49,8 +49,10 @@ import `is`.xyz.mpv.MPVLib
 import `is`.xyz.mpv.MPVNode
 import `is`.xyz.mpv.Utils
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import live.mehiz.mpvkt.database.entities.CustomButtonEntity
 import live.mehiz.mpvkt.database.entities.PlaybackStateEntity
 import live.mehiz.mpvkt.databinding.PlayerLayoutBinding
@@ -64,6 +66,20 @@ import live.mehiz.mpvkt.ui.player.controls.PlayerControls
 import live.mehiz.mpvkt.ui.theme.MpvKtTheme
 import org.koin.android.ext.android.inject
 import java.io.File
+
+private data class PlaybackStateSnapshot(
+    val mediaTitle: String,
+    val position: Int,
+    val duration: Int,
+    val playbackSpeed: Double,
+    val sid: Int,
+    val subDelay: Double,
+    val subSpeed: Double,
+    val secondarySid: Int,
+    val secondarySubDelay: Double,
+    val aid: Int,
+    val audioDelay: Double,
+)
 
 @Suppress("TooManyFunctions", "LargeClass")
 class PlayerActivity : AppCompatActivity() {
@@ -86,6 +102,8 @@ class PlayerActivity : AppCompatActivity() {
     private var fileName = ""
     private var mediaPlaybackService: MediaPlaybackService? = null
     private var serviceBound = false
+    private var mpvReleased = false
+    private var playbackStateSaveJob: Job? = null
 
     private var audioFocusRequest: AudioFocusRequestCompat? = null
     private var restoreAudioFocus: () -> Unit = {}
@@ -150,12 +168,15 @@ class PlayerActivity : AppCompatActivity() {
             noisyReceiver.initialized = false
         }
 
-        player.isExiting = true
-        if (isFinishing) {
-            MPVLib.command("stop")
+        if (!mpvReleased) {
+            player.isExiting = true
+            if (isFinishing) {
+                MPVLib.command("stop")
+            }
+            MPVLib.removeObserver(playerObserver)
+            MPVLib.destroy()
+            mpvReleased = true
         }
-        MPVLib.removeObserver(playerObserver)
-        MPVLib.destroy()
 
         super.onDestroy()
     }
@@ -602,7 +623,7 @@ class PlayerActivity : AppCompatActivity() {
                     MPVLib.setPropertyString("force-media-title", fileName)
                 }
                 
-                lifecycleScope.launch(Dispatchers.IO) {
+                lifecycleScope.launch {
                     loadVideoPlaybackState(fileName)
                 }
                 setOrientation()
@@ -614,35 +635,58 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun saveVideoPlaybackState(mediaTitle: String) {
-        if (mediaTitle.isBlank()) return
-        lifecycleScope.launch(Dispatchers.IO) {
-            val oldState = playbackStateRepository.getVideoDataByTitle(fileName)
+        playbackStateSaveJob = lifecycleScope.launch(Dispatchers.IO) {
+            val snapshot = capturePlaybackState(mediaTitle) ?: return@launch
+            val oldState = playbackStateRepository.getVideoDataByTitle(snapshot.mediaTitle)
             playbackStateRepository.upsert(
                 PlaybackStateEntity(
-                    mediaTitle = mediaTitle,
+                    mediaTitle = snapshot.mediaTitle,
                     lastPosition = if (playerPreferences.savePositionOnQuit.get()) {
-                        val pos = viewModel.pos ?: 0
-                        val duration = viewModel.duration ?: 0
+                        val pos = snapshot.position
+                        val duration = snapshot.duration
                         if (pos < duration - 1) pos else 0
                     } else {
                         oldState?.lastPosition ?: 0
                     },
-                    playbackSpeed = MPVLib.getPropertyDouble("speed")!!,
-                    sid = player.sid,
-                    subDelay = (MPVLib.getPropertyDouble("sub-delay")!! * 1000).toInt(),
-                    subSpeed = MPVLib.getPropertyDouble("sub-speed")!!,
-                    secondarySid = player.secondarySid,
-                    secondarySubDelay = (MPVLib.getPropertyDouble("secondary-sub-delay")!! * 1000).toInt(),
-                    aid = player.aid,
-                    audioDelay = (MPVLib.getPropertyDouble("audio-delay")!! * 1000).toInt(),
+                    playbackSpeed = snapshot.playbackSpeed,
+                    sid = snapshot.sid,
+                    subDelay = (snapshot.subDelay * 1000).toInt(),
+                    subSpeed = snapshot.subSpeed,
+                    secondarySid = snapshot.secondarySid,
+                    secondarySubDelay = (snapshot.secondarySubDelay * 1000).toInt(),
+                    aid = snapshot.aid,
+                    audioDelay = (snapshot.audioDelay * 1000).toInt(),
                 ),
             )
         }
     }
 
+    private fun capturePlaybackState(mediaTitle: String): PlaybackStateSnapshot? {
+        if (mediaTitle.isBlank() || player.isExiting || mpvReleased) return null
+        return runCatching {
+            PlaybackStateSnapshot(
+                mediaTitle = mediaTitle,
+                position = viewModel.pos ?: 0,
+                duration = viewModel.duration ?: 0,
+                playbackSpeed = MPVLib.getPropertyDouble("speed") ?: playerPreferences.defaultSpeed.get().toDouble(),
+                sid = player.sid,
+                subDelay = MPVLib.getPropertyDouble("sub-delay") ?: subtitlesPreferences.defaultSubDelay.get() / 1000.0,
+                subSpeed = MPVLib.getPropertyDouble("sub-speed") ?: subtitlesPreferences.defaultSubSpeed.get().toDouble(),
+                secondarySid = player.secondarySid,
+                secondarySubDelay = MPVLib.getPropertyDouble("secondary-sub-delay")
+                    ?: subtitlesPreferences.defaultSecondarySubDelay.get() / 1000.0,
+                aid = player.aid,
+                audioDelay = MPVLib.getPropertyDouble("audio-delay") ?: audioPreferences.defaultAudioDelay.get() / 1000.0,
+            )
+        }.getOrNull()
+    }
+
     private suspend fun loadVideoPlaybackState(mediaTitle: String) {
         if (mediaTitle.isBlank()) return
-        val state = playbackStateRepository.getVideoDataByTitle(mediaTitle)
+        val state = withContext(Dispatchers.IO) {
+            playbackStateRepository.getVideoDataByTitle(mediaTitle)
+        }
+        if (player.isExiting || mpvReleased) return
         val getDelay: (Int, Int?) -> Double = { preferenceDelay, stateDelay ->
             (stateDelay ?: preferenceDelay) / 1000.0
         }
@@ -654,8 +698,8 @@ class PlayerActivity : AppCompatActivity() {
             player.secondarySid = it.secondarySid
             player.aid = it.aid
             MPVLib.setPropertyDouble("sub-delay", subDelay)
-            MPVLib.setPropertyDouble("sub-delay", secondarySubDelay)
-            MPVLib.setPropertyDouble("sub-delay", it.playbackSpeed)
+            MPVLib.setPropertyDouble("secondary-sub-delay", secondarySubDelay)
+            MPVLib.setPropertyDouble("speed", it.playbackSpeed)
             MPVLib.setPropertyDouble("audio-delay", audioDelay)
         }
         if (playerPreferences.savePositionOnQuit.get()) {
@@ -694,11 +738,14 @@ class PlayerActivity : AppCompatActivity() {
         }
         builder.setActions(createPipActions(this, viewModel.paused == true))
         builder.setSourceRectHint(pipRect)
-        MPVLib.getPropertyInt("video-params/h")?.let {
-            val height = it
-            val width = it * player.getVideoOutAspect()!!
-            val rational = Rational(height, width.toInt()).toFloat()
-            if (rational in 0.42..2.38) builder.setAspectRatio(Rational(width.toInt(), height))
+        val videoHeight = MPVLib.getPropertyInt("video-params/h") ?: 0
+        val videoAspect = player.getVideoOutAspect() ?: 0.0
+        if (videoHeight > 0 && videoAspect > 0.0) {
+            val width = (videoHeight * videoAspect).toInt()
+            if (width > 0) {
+                val rational = Rational(videoHeight, width).toFloat()
+                if (rational in 0.42..2.38) builder.setAspectRatio(Rational(width, videoHeight))
+            }
         }
         return builder.build()
     }

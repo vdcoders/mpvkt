@@ -9,7 +9,7 @@ plugins {
   alias(libs.plugins.kotlin.serialization)
 }
 
-version = "0.0.10"
+version = "0.0.11"
 android {
   namespace = "live.mehiz.mpvkt"
     compileSdk = libs.versions.compileSdk.get().toInt()

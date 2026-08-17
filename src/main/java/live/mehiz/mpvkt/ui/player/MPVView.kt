@@ -34,6 +34,7 @@ class MPVView(context: Context, attributes: AttributeSet) : BaseMPVView(context,
    * Returns the video aspect ratio. Rotation is taken into account.
    */
   fun getVideoOutAspect(): Double? {
+    if (isExiting) return null
     return MPVLib.getPropertyDouble("video-params/aspect")?.let {
       if (it < 0.001) return 0.0
       if ((MPVLib.getPropertyInt("video-params/rotate") ?: 0) % 180 == 90) 1.0 / it else it
@@ -41,12 +42,14 @@ class MPVView(context: Context, attributes: AttributeSet) : BaseMPVView(context,
   }
 
   class TrackDelegate(private val name: String) {
-    operator fun getValue(thisRef: Any?, property: KProperty<*>): Int {
+    operator fun getValue(thisRef: MPVView, property: KProperty<*>): Int {
+      if (thisRef.isExiting) return -1
       val v = MPVLib.getPropertyString(name)
       // we can get null here for "no" or other invalid value
       return v?.toIntOrNull() ?: -1
     }
-    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Int) {
+    operator fun setValue(thisRef: MPVView, property: KProperty<*>, value: Int) {
+      if (thisRef.isExiting) return
       if (value == -1) MPVLib.setPropertyString(name, "no") else MPVLib.setPropertyInt(name, value)
     }
   }
